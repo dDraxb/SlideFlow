@@ -1,0 +1,11 @@
+{
+  "name": "slideflow-monorepo",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "pnpm -r build",
+    "test": "pnpm -r test",
+    "sync:authoring": "node scripts/sync-authoring.mjs"
+  },
+  "packageManager": "pnpm@10.22.0"
+}
