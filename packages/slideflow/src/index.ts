@@ -3,3 +3,5 @@ export { createHashAdapter } from "./url";
 export type { UrlAdapter, UrlState } from "./url";
 export { DeckProvider, useDeck, useStageContext } from "./DeckContext";
 export { Reveal } from "./Reveal";
+export { Deck } from "./Deck";
+export type { DeckProps } from "./Deck";
