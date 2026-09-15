@@ -28,7 +28,7 @@ Mode         = "present" | "learn"
 StageContext { mode, step, steps, isPresent, isLearn }
 ```
 
-`Stage` renders the same visual in both modes; `ctx.step` drives what a `Reveal` shows. `steps` on a slide is how many progressive reveals it declares (0 or omitted = static). `narration` is the written voice-over shown in the explain drawer — a string for one block, or a string array for one block per step.
+`Stage` renders the same visual in both modes; `ctx.step` drives what a `Reveal` shows. `steps` on a slide is how many progressive reveals it declares (0 or omitted = static). `narration` is the written voice-over shown in the explain drawer — a string for one block, or a string array for one block per step; if a slide sets both `explain` and `narration`, `explain` wins.
 
 A minimal complete deck — one title slide, one two-step reveal:
 
@@ -85,7 +85,7 @@ Present mode reveals a slide's steps one at a time as the presenter navigates �
 
 ## URL contract
 
-By default the deck syncs itself to the URL with zero configuration: hash `#/<index>/<step>` plus `?mode=learn` when in learn mode. Writes use `history.replaceState`, so one deck session is one history entry and Back leaves the deck rather than stepping back through slides. An out-of-range or garbage index/step clamps to the nearest valid slide/step.
+By default the deck syncs itself to the URL with zero configuration: hash `#/<index>`, with `/<step>` appended only once step > 0 (step 0 is omitted; both forms parse), plus `?mode=learn` when in learn mode. Writes use `history.replaceState`, so one deck session is one history entry and Back leaves the deck rather than stepping back through slides. An out-of-range or garbage index/step clamps to the nearest valid slide/step.
 
 ## Theming
 

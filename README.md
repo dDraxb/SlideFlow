@@ -15,12 +15,15 @@ SlideFlow/
 │   │   │   ├── Deck.tsx        # chrome, keyboard, explain drawer, cross-fade
 │   │   │   ├── Reveal.tsx      # CSS-only reveal primitive
 │   │   │   ├── NavHelp.tsx     # help modal (focus mgmt, key swallowing)
+│   │   │   ├── url.ts          # hash UrlAdapter, the URL contract
+│   │   │   ├── cx.ts           # tiny classnames join
 │   │   │   └── inert.ts        # React 18 inert polyfill
 │   │   ├── styles.css          # chrome + reveal/cross-fade animations, token-driven
 │   │   ├── theme.css           # default dark palette (optional import)
 │   │   └── package.json        # peers: react, react-dom
 │   └── create-slideflow/       # scaffolder → npm
 │       ├── index.mjs           # bin: prompts → copy template + string replace
+│       ├── lib.mjs             # scaffold(): copy template, replace tokens
 │       └── template/           # full deck app skeleton
 ├── demo/                       # workspace app: demo deck, dev playground
 ├── docs/authoring/             # canonical deck-standard, writing-rules, tone-of-voice
@@ -46,11 +49,11 @@ Publishing is manual and simple for v1 — no changesets, no CI:
 
 1. Bump the version in `packages/slideflow/package.json` and `packages/create-slideflow/package.json`.
 2. Run `pnpm sync:authoring` so the scaffolder's template ships the current authoring docs and text lint.
-3. Run `pnpm -r publish` from the repo root to publish both packages.
+3. Run `pnpm -r publish` from the repo root to publish both packages — from `main`, with a clean working tree: pnpm's git checks reject uncommitted or untracked files and prompt for confirmation on any other branch, so pass `--no-git-checks` explicitly if you need to publish outside that state.
 
 ## Integrating with a host app that has its own router
 
-The built-in hash sync (`#/<index>/<step>` + `?mode=learn`) works with zero configuration, but a host app that already owns the address bar — a host app, say, with `react-router` — can hand `Deck` a `urlAdapter` to read and write its own routes instead, and an `onExit` callback for what happens when the last Escape press leaves the deck:
+The built-in hash sync (`#/<index>`, with `/<step>` appended once step > 0, plus `?mode=learn`) works with zero configuration, but a host app that already owns the address bar — a host app, say, with `react-router` — can hand `Deck` a `urlAdapter` to read and write its own routes instead, and an `onExit` callback for what happens when the last Escape press leaves the deck:
 
 ```tsx
 <Deck
