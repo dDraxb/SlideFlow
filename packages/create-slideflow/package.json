@@ -1,0 +1,16 @@
+{
+  "name": "create-slideflow",
+  "version": "0.1.0",
+  "description": "Scaffold a SlideFlow deck app.",
+  "license": "MIT",
+  "type": "module",
+  "bin": { "create-slideflow": "./index.mjs" },
+  "files": ["index.mjs", "lib.mjs", "template"],
+  "scripts": {
+    "test": "vitest run",
+    "prepack": "node ../../scripts/sync-authoring.mjs"
+  },
+  "devDependencies": {
+    "vitest": "^2.1.8"
+  }
+}

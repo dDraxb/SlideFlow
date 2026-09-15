@@ -1,0 +1,8 @@
+/* Your deck's brand. Override any engine token here; theme.css in the
+   slideflow package documents the full list. Delete overrides you don't
+   need; the defaults are projector-tested. */
+:root {
+  /* --sf-accent-1: #34d399; */
+  /* --sf-accent-2: #fbbf24; */
+  /* --sf-font: ui-sans-serif, system-ui, sans-serif; */
+}
