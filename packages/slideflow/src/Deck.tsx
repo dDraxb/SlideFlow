@@ -33,7 +33,12 @@ function DeckRoot({ onExit }: { onExit?: () => void }) {
     const onKey = (e: KeyboardEvent) => {
       // Never hijack typing inside a form field on an interactive slide.
       const t = e.target as HTMLElement | null;
-      if (t && (t.tagName === "INPUT" || t.tagName === "TEXTAREA" || t.isContentEditable)) return;
+      if (t && (t.tagName === "INPUT" || t.tagName === "TEXTAREA" || t.tagName === "SELECT" || t.isContentEditable))
+        return;
+
+      // Never hijack browser/OS shortcuts: Cmd+Arrow (Back/Forward), Alt+Arrow,
+      // Ctrl+E, etc. should reach the browser, not the deck.
+      if (e.metaKey || e.ctrlKey || e.altKey) return;
 
       // The help overlay is modal and must swallow navigation, or a presenter
       // dismissing it with Space advances hidden reveals behind the scrim.

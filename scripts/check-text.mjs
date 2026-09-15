@@ -2,11 +2,16 @@
 // Writing-rules gate for deck text. Usage: node check-text.mjs [srcDir]. See docs/authoring/writing-rules.md.
 // Dashes are a hard FAIL (they never appear in code, so detection is exact).
 // The rest are WARN (heuristic — code lines are skipped, but review them by eye).
-import { readFileSync, readdirSync, statSync } from 'node:fs'
+import { existsSync, readFileSync, readdirSync, statSync } from 'node:fs'
 import { join } from 'node:path'
 
 const ROOT = process.argv[2] ?? 'src'
 const CAPS_OK = new Set(['RAG', 'CSV', 'HR', 'AI', 'CV', 'NL', 'ON', 'OFF', 'DOM', 'URL', 'API', 'JSON', 'UI'])
+
+if (!existsSync(ROOT)) {
+  console.error(`check-text: directory not found: ${ROOT}`)
+  process.exit(1)
+}
 
 function walk(dir) {
   const out = []

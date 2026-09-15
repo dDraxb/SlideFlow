@@ -4,7 +4,7 @@ A slide deck built on [slideflow](https://www.npmjs.com/package/slideflow).
 
 ## Replace the examples (start here)
 
-The two slides in this project are placeholders. They render an orange
+The two slides in this project are placeholders. They render an amber
 "Example slide: replace me" ribbon so they can never sneak into a real talk.
 To replace them:
 

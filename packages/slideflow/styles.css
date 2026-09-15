@@ -14,6 +14,20 @@
   overflow: hidden;
 }
 
+/* Subtle wash so the dark surface is not flat under projection. .sf-root is
+   opaque and fills the viewport, so the wash lives here (not on body::before,
+   which it would fully occlude). */
+.sf-root::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(1200px 700px at 80% -10%, rgba(52, 211, 153, 0.05), transparent 60%),
+    radial-gradient(1000px 600px at 0% 110%, rgba(96, 165, 250, 0.05), transparent 60%);
+  z-index: 0;
+}
+
 /* ---------- progress ---------- */
 .sf-progress {
   position: absolute;
@@ -32,6 +46,8 @@
 /* ---------- stage + cross-fade ---------- */
 /* Current and exit layers share the same grid cell so they overlap. */
 .sf-stage {
+  position: relative;
+  z-index: 1;
   flex: 1;
   display: grid;
   place-items: center;
@@ -70,6 +86,8 @@
 
 /* ---------- chrome ---------- */
 .sf-chrome {
+  position: relative;
+  z-index: 1;
   display: flex;
   align-items: center;
   gap: 0.75rem;
