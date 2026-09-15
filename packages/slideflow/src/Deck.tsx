@@ -150,7 +150,9 @@ function DeckRoot({ onExit }: { onExit?: () => void }) {
             className="sf-stage-inner sf-stage-exit"
             key={`exit-${exiting.key}`}
             aria-hidden="true"
-            onAnimationEnd={() => setExiting(null)}
+            onAnimationEnd={(e) => {
+              if (e.target === e.currentTarget) setExiting(null);
+            }}
           >
             {exiting.node}
           </div>

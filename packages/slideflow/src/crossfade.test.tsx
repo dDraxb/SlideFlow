@@ -43,6 +43,17 @@ describe("cross-fade", () => {
     vi.useRealTimers();
   });
 
+  test("ignores a bubbled animationend from a descendant of the exit layer", () => {
+    const { container } = render(<Deck deck={deck} />);
+    fireEvent.keyDown(window, { key: "ArrowRight" });
+    const exit = container.querySelector(".sf-stage-exit")!;
+    const child = exit.querySelector("p")!;
+    fireEvent.animationEnd(child);
+    expect(container.querySelector(".sf-stage-exit")).not.toBeNull();
+    fireEvent.animationEnd(exit);
+    expect(container.querySelector(".sf-stage-exit")).toBeNull();
+  });
+
   test("a step change within a slide does not trigger an exit layer", () => {
     const deck2: DeckModel = {
       id: "t2",
