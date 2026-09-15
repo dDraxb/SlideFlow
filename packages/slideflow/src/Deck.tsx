@@ -1,4 +1,4 @@
-import { useEffect, useState, type MouseEvent } from "react";
+import { useEffect, useLayoutEffect, useRef, useState, type MouseEvent, type ReactNode } from "react";
 import { cx } from "./cx";
 import { DeckProvider, useDeck, useStageContext } from "./DeckContext";
 import { inertWhen } from "./inert";
@@ -97,6 +97,33 @@ function DeckRoot({ onExit }: { onExit?: () => void }) {
     return () => window.removeEventListener("keydown", onKey);
   }, [next, prev, goTo, index, total, toggleExplain, onExit, explainOpen, helpOpen]);
 
+  // Slide cross-fade without framer-motion: snapshot the previous render's
+  // stage; when the slide id changes, keep that snapshot mounted as an exit
+  // layer and drop it when its fade-out animation ends.
+  const [exiting, setExiting] = useState<{ key: string; node: ReactNode } | null>(null);
+  const prevRender = useRef<{ key: string; node: ReactNode } | null>(null);
+
+  const slideId = slide?.id;
+  useLayoutEffect(() => {
+    // Layout effects run before this render's snapshot effect below, so
+    // prevRender still holds the PREVIOUS render's stage here.
+    if (prevRender.current && slideId && prevRender.current.key !== slideId) {
+      setExiting(prevRender.current);
+    }
+  }, [slideId]);
+
+  useEffect(() => {
+    if (slide) prevRender.current = { key: slide.id, node: <slide.Stage ctx={ctx} /> };
+  });
+
+  // Reduced motion sets `animation: none`, so animationend never fires;
+  // this timeout is the fallback that guarantees the exit layer unmounts.
+  useEffect(() => {
+    if (!exiting) return;
+    const t = window.setTimeout(() => setExiting(null), 600);
+    return () => window.clearTimeout(t);
+  }, [exiting]);
+
   if (!slide) return null;
   const Stage = slide.Stage;
   const progress = total > 1 ? (index / (total - 1)) * 100 : 0;
@@ -118,6 +145,16 @@ function DeckRoot({ onExit }: { onExit?: () => void }) {
           level, so the deck is fully operable without this element; it
           carries no role by design. */}
       <div className="sf-stage" onClick={onStageClick}>
+        {exiting && (
+          <div
+            className="sf-stage-inner sf-stage-exit"
+            key={`exit-${exiting.key}`}
+            aria-hidden="true"
+            onAnimationEnd={() => setExiting(null)}
+          >
+            {exiting.node}
+          </div>
+        )}
         <div className="sf-stage-inner" key={slide.id}>
           <Stage ctx={ctx} />
         </div>
