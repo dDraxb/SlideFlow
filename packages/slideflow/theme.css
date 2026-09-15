@@ -1,0 +1,72 @@
+/*
+ * SlideFlow default theme: a dark, projector-friendly palette plus page base.
+ * Optional import; decks may replace it entirely or override single tokens.
+ */
+:root {
+  /* surface */
+  --sf-bg: #0d1117;
+  --sf-bg-deep: #06080c;
+  --sf-bg-panel: #0b0f15;
+  --sf-bg-panel-2: #0f141b;
+  --sf-bg-raise: rgba(255, 255, 255, 0.02);
+  --sf-bg-raise-2: rgba(255, 255, 255, 0.05);
+  --sf-border: rgba(255, 255, 255, 0.07);
+  --sf-border-strong: rgba(148, 163, 184, 0.16);
+
+  /* text */
+  --sf-text: #cbd5e1;
+  --sf-text-strong: #f1f5f9;
+  --sf-text-bright: #e2e8f0;
+  --sf-text-dim: #94a3b8;
+  --sf-text-faint: #788495;
+
+  /* accents */
+  --sf-accent-1: #34d399; /* emerald */
+  --sf-accent-2: #fbbf24; /* amber */
+  --sf-accent-3: #fb923c; /* orange */
+  --sf-accent-cool: #60a5fa;
+  --sf-accent-violet: #a78bfa;
+  --sf-accent-1-wash: rgba(52, 211, 153, 0.06);
+  --sf-accent-2-wash: rgba(251, 191, 36, 0.06);
+  --sf-accent-3-wash: rgba(251, 146, 60, 0.06);
+
+  /* type */
+  --sf-font: ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  --sf-font-mono: ui-monospace, "SF Mono", "JetBrains Mono", Menlo, monospace;
+
+  /* rhythm */
+  --sf-radius: 14px;
+  --sf-radius-sm: 9px;
+  --sf-ease: cubic-bezier(0.22, 1, 0.36, 1);
+
+  /* fluid type scale for stages */
+  --sf-fs-hero: clamp(2.4rem, 6vw, 5rem);
+  --sf-fs-h1: clamp(1.8rem, 4vw, 3.2rem);
+  --sf-fs-h2: clamp(1.3rem, 2.6vw, 2rem);
+  --sf-fs-body: clamp(1rem, 1.5vw, 1.35rem);
+  --sf-fs-small: clamp(0.8rem, 1.1vw, 1rem);
+}
+
+* { box-sizing: border-box; }
+
+html, body, #root { height: 100%; margin: 0; }
+
+body {
+  background: var(--sf-bg);
+  color: var(--sf-text);
+  font-family: var(--sf-font);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+/* Subtle wash so the dark surface is not flat under projection. */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(1200px 700px at 80% -10%, rgba(52, 211, 153, 0.05), transparent 60%),
+    radial-gradient(1000px 600px at 0% 110%, rgba(96, 165, 250, 0.05), transparent 60%);
+  z-index: 0;
+}
