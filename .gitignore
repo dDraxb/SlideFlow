@@ -3,3 +3,6 @@ dist/
 *.local
 .DS_Store
 *.tsbuildinfo
+
+# local process docs, never published
+docs/superpowers/

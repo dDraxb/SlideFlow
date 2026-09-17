@@ -93,7 +93,7 @@ All visual tokens are CSS custom properties prefixed `--sf-*` — surface and te
 
 ## Escape hatches: `urlAdapter` and `onExit`
 
-For a host app that already owns the address bar (a router-driven site like a host app), pass a `urlAdapter` to replace the built-in hash sync:
+For a host app that already owns the address bar (a router-driven site embedding a deck), pass a `urlAdapter` to replace the built-in hash sync:
 
 ```tsx
 interface UrlAdapter {
