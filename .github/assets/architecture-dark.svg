@@ -1,0 +1,95 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 920 456" role="img" aria-labelledby="sf-arch-dark-title sf-arch-dark-desc" font-family="'Helvetica Neue', Arial, sans-serif">
+  <title id="sf-arch-dark-title">How SlideFlow reaches a deck</title>
+  <desc id="sf-arch-dark-desc">Architecture diagram: the SlideFlow monorepo publishes the slideflow engine and the create-slideflow scaffolder to the npm registry, from which pnpm create generates your deck app; a demo deck consumes the engine directly inside the workspace.</desc>
+  <defs>
+    <marker id="sfad-arrow" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+      <polygon points="0 0, 8 3, 0 6" fill="#94a3b8"/>
+    </marker>
+    <marker id="sfad-arrow-accent" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+      <polygon points="0 0, 8 3, 0 6" fill="#34d399"/>
+    </marker>
+  </defs>
+
+  <rect width="100%" height="100%" fill="#0d1117"/>
+
+  <!-- zones -->
+  <rect x="32" y="48" width="280" height="304" rx="8" fill="rgba(245,245,245,0.02)" stroke="rgba(226,232,240,0.12)" stroke-width="0.8"/>
+  <rect x="44" y="52" width="164" height="12" rx="2" fill="#0d1117"/>
+  <text x="126" y="61" fill="rgba(148,163,184,0.55)" font-size="7" font-family="Menlo, Consolas, monospace" text-anchor="middle" letter-spacing="0.14em">MONOREPO · PNPM WORKSPACE</text>
+
+  <rect x="656" y="104" width="232" height="168" rx="8" fill="rgba(245,245,245,0.02)" stroke="rgba(226,232,240,0.12)" stroke-width="0.8"/>
+  <rect x="668" y="108" width="96" height="12" rx="2" fill="#0d1117"/>
+  <text x="716" y="117" fill="rgba(148,163,184,0.55)" font-size="7" font-family="Menlo, Consolas, monospace" text-anchor="middle" letter-spacing="0.14em">YOUR MACHINE</text>
+
+  <!-- arrows (drawn before nodes) -->
+  <!-- engine -> npm : publish -->
+  <path d="M 288,124 H 336 Q 344,124 344,132 V 164 Q 344,172 352,172 H 414" fill="none" stroke="#94a3b8" stroke-width="1.2" marker-end="url(#sfad-arrow)"/>
+  <rect x="352" y="140" width="44" height="12" rx="2" fill="#0d1117"/>
+  <text x="374" y="149" fill="#788495" font-size="8" font-family="Menlo, Consolas, monospace" text-anchor="middle" letter-spacing="0.06em">PUBLISH</text>
+
+  <!-- scaffolder -> npm -->
+  <path d="M 288,296 H 352 Q 360,296 360,288 V 204 Q 360,196 368,196 H 414" fill="none" stroke="#94a3b8" stroke-width="1.2" marker-end="url(#sfad-arrow)"/>
+
+  <!-- npm -> your deck app -->
+  <path d="M 576,184 H 678" fill="none" stroke="#34d399" stroke-width="1.2" marker-end="url(#sfad-arrow-accent)"/>
+  <rect x="595" y="164" width="64" height="12" rx="2" fill="#0d1117"/>
+  <text x="627" y="173" fill="#34d399" font-size="8" font-family="Menlo, Consolas, monospace" text-anchor="middle" letter-spacing="0.06em">PNPM CREATE</text>
+
+  <!-- demo -> engine (workspace, dashed) -->
+  <path d="M 172,184 V 163" fill="none" stroke="#94a3b8" stroke-width="1" stroke-dasharray="4,3" marker-end="url(#sfad-arrow)"/>
+  <rect x="184" y="166" width="68" height="12" rx="2" fill="#0d1117"/>
+  <text x="218" y="175" fill="#788495" font-size="8" font-family="Menlo, Consolas, monospace" text-anchor="middle" letter-spacing="0.06em">WORKSPACE:*</text>
+
+  <!-- nodes -->
+  <!-- slideflow engine (focal) -->
+  <rect x="56" y="88" width="232" height="72" rx="6" fill="#0d1117"/>
+  <rect x="56" y="88" width="232" height="72" rx="6" fill="rgba(52,211,153,0.08)" stroke="#34d399" stroke-width="1"/>
+  <rect x="64" y="94" width="28" height="12" rx="2" fill="transparent" stroke="rgba(52,211,153,0.45)" stroke-width="0.8"/>
+  <text x="78" y="103" fill="rgba(52,211,153,0.9)" font-size="7" font-family="Menlo, Consolas, monospace" text-anchor="middle" letter-spacing="0.08em">PKG</text>
+  <text x="172" y="126" fill="#e2e8f0" font-size="12" font-weight="600" text-anchor="middle">slideflow</text>
+  <text x="172" y="142" fill="#94a3b8" font-size="9" font-family="Menlo, Consolas, monospace" text-anchor="middle">presentation engine · react peers only</text>
+
+  <!-- demo deck -->
+  <rect x="56" y="184" width="232" height="56" rx="6" fill="#0d1117"/>
+  <rect x="56" y="184" width="232" height="56" rx="6" fill="rgba(245,245,245,0.05)" stroke="#94a3b8" stroke-width="1"/>
+  <rect x="64" y="190" width="28" height="12" rx="2" fill="transparent" stroke="rgba(148,163,184,0.40)" stroke-width="0.8"/>
+  <text x="78" y="199" fill="rgba(148,163,184,0.9)" font-size="7" font-family="Menlo, Consolas, monospace" text-anchor="middle" letter-spacing="0.08em">APP</text>
+  <text x="172" y="212" fill="#e2e8f0" font-size="12" font-weight="600" text-anchor="middle">demo deck</text>
+  <text x="172" y="228" fill="#94a3b8" font-size="9" font-family="Menlo, Consolas, monospace" text-anchor="middle">dev playground · regression surface</text>
+
+  <!-- create-slideflow -->
+  <rect x="56" y="264" width="232" height="64" rx="6" fill="#0d1117"/>
+  <rect x="56" y="264" width="232" height="64" rx="6" fill="#161b22" stroke="#e2e8f0" stroke-width="1"/>
+  <rect x="64" y="270" width="28" height="12" rx="2" fill="transparent" stroke="rgba(226,232,240,0.40)" stroke-width="0.8"/>
+  <text x="78" y="279" fill="rgba(226,232,240,0.8)" font-size="7" font-family="Menlo, Consolas, monospace" text-anchor="middle" letter-spacing="0.08em">CLI</text>
+  <text x="172" y="296" fill="#e2e8f0" font-size="12" font-weight="600" text-anchor="middle">create-slideflow</text>
+  <text x="172" y="312" fill="#94a3b8" font-size="9" font-family="Menlo, Consolas, monospace" text-anchor="middle">scaffolder · deck app template</text>
+
+  <!-- npm registry -->
+  <rect x="416" y="148" width="160" height="72" rx="6" fill="#0d1117"/>
+  <rect x="416" y="148" width="160" height="72" rx="6" fill="rgba(245,245,245,0.03)" stroke="rgba(226,232,240,0.30)" stroke-width="1"/>
+  <rect x="424" y="154" width="28" height="12" rx="2" fill="transparent" stroke="rgba(226,232,240,0.40)" stroke-width="0.8"/>
+  <text x="438" y="163" fill="rgba(226,232,240,0.8)" font-size="7" font-family="Menlo, Consolas, monospace" text-anchor="middle" letter-spacing="0.08em">REG</text>
+  <text x="496" y="186" fill="#e2e8f0" font-size="12" font-weight="600" text-anchor="middle">npm registry</text>
+  <text x="496" y="202" fill="#94a3b8" font-size="9" font-family="Menlo, Consolas, monospace" text-anchor="middle">public packages</text>
+
+  <!-- your deck app (focal) -->
+  <rect x="680" y="144" width="184" height="80" rx="6" fill="#0d1117"/>
+  <rect x="680" y="144" width="184" height="80" rx="6" fill="rgba(52,211,153,0.08)" stroke="#34d399" stroke-width="1"/>
+  <rect x="688" y="150" width="28" height="12" rx="2" fill="transparent" stroke="rgba(52,211,153,0.45)" stroke-width="0.8"/>
+  <text x="702" y="159" fill="rgba(52,211,153,0.9)" font-size="7" font-family="Menlo, Consolas, monospace" text-anchor="middle" letter-spacing="0.08em">APP</text>
+  <text x="772" y="182" fill="#e2e8f0" font-size="12" font-weight="600" text-anchor="middle">your deck app</text>
+  <text x="772" y="198" fill="#94a3b8" font-size="9" font-family="Menlo, Consolas, monospace" text-anchor="middle">slideflow ^0.1 · vite + react</text>
+
+  <!-- legend -->
+  <line x1="32" y1="396" x2="888" y2="396" stroke="rgba(226,232,240,0.12)" stroke-width="0.8"/>
+  <text x="32" y="416" fill="#94a3b8" font-size="8" font-family="Menlo, Consolas, monospace" letter-spacing="0.14em">LEGEND</text>
+  <rect x="104" y="406" width="12" height="12" rx="2" fill="rgba(52,211,153,0.08)" stroke="#34d399" stroke-width="1"/>
+  <text x="124" y="416" fill="#94a3b8" font-size="8" font-family="Menlo, Consolas, monospace">FOCAL · WHAT YOU TOUCH</text>
+  <rect x="272" y="406" width="12" height="12" rx="2" fill="#161b22" stroke="#e2e8f0" stroke-width="1"/>
+  <text x="292" y="416" fill="#94a3b8" font-size="8" font-family="Menlo, Consolas, monospace">PACKAGE</text>
+  <rect x="368" y="406" width="12" height="12" rx="2" fill="rgba(245,245,245,0.03)" stroke="rgba(226,232,240,0.30)" stroke-width="1"/>
+  <text x="388" y="416" fill="#94a3b8" font-size="8" font-family="Menlo, Consolas, monospace">EXTERNAL</text>
+  <line x1="472" y1="412" x2="500" y2="412" stroke="#94a3b8" stroke-width="1" stroke-dasharray="4,3"/>
+  <text x="508" y="416" fill="#94a3b8" font-size="8" font-family="Menlo, Consolas, monospace">WORKSPACE LINK</text>
+</svg>
